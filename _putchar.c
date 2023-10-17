@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _putchar - a function that prints a single character
  * @c: a single char as parameter
