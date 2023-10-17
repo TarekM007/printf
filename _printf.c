@@ -1,53 +1,38 @@
 #include "main.h"
 /**
- * _printf - a function that prints chars, strings and integers
- * @format: a char parameter
- * Return: returns the number of printed characters
+ * _printf - a function that prints.
+ * @format: char as parameter.
+ * Return: length of the string.
  */
-int _printf(const char *format, ...)
+int _printf(const char * const format, ...)
 {
-char *str;
-int i, count = 0;
+select_func arr[] = {
+{"%s", printf_string}, {"%c", printf_char},
+{"%%", printf_amp},
+{"%i", printf_int}, {"%d", printf_dec}
+};
+
 va_list args;
+int i = 0, j, count = 0;
+
 va_start(args, format);
-if (format == NULL)
+if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 return (-1);
-while (*format)
+
+Here:
+while (format[i] != '\0')
 {
-if (*format == '%')
+j = 4;
+while (j >= 0)
 {
-switch (*++format)
+if (arr[j].sp[0] == format[i] && arr[j].sp[1] == format[i + 1])
 {
-case '\0': case ' ':
-return (-1);
-break;
-case 'c':
-_putchar(va_arg(args, int));
+count += arr[j].f(args);
+i = i + 2;
+goto Here; }
+j--; }
+_putchar(format[i]);
 count++;
-break;
-case '%':
-_putchar('%');
-break;
-case 's':
-str = va_arg(args, char*);
-for (i = 0; str[i] != '\0'; i++)
-{
-_putchar(str[i]);
-count++; }
-break;
-case 'd': case 'i':
-print_int(args);
-count++;
-break;
-default:
-_putchar('%');
-_putchar(*format);
-count++;
-break; }}
-else
-{
-_putchar(*format);
-count++; }
-format++; }
+i++; }
 va_end(args);
 return (count); }
