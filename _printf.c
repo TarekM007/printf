@@ -1,6 +1,12 @@
 #include "main.h"
+/**
+ * _printf - a function that prints chars, strings and integers
+ * @format: a char parameter
+ * Return: returns the number of printed characters
+ */
 int _printf(const char *format, ...)
 {
+char *str;
 int i, count = 0;
 va_list args;
 va_start(args, format);
@@ -27,8 +33,7 @@ str = va_arg(args, char*);
 for (i = 0; str[i] != '\0'; i++)
 {
 _putchar(str[i]);
-count++;
-}
+count++; }
 break;
 case 'd': case 'i':
 print_int(args);
@@ -38,16 +43,11 @@ default:
 _putchar('%');
 _putchar(*format);
 count++;
-break;
-}
-}
+break; }}
 else
 {
 _putchar(*format);
-count++;
-}
-format++;
-}
+count++; }
+format++; }
 va_end(args);
-return (count);
-}
+return (count); }
