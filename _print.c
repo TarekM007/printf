@@ -27,7 +27,7 @@ case 's':
 str = va_arg(args, char*);
 for (i = 0; str[i] != '\0'; i++)
 _putchar(str[i]);
-count += str[i];
+count++;
 break;
 case 'd': case 'i':
 print_int(va_arg(args, int));
